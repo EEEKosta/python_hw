@@ -10,6 +10,6 @@ def bug_info():
         'status': status
     }
 
-    return bug
+    print(bug)
 
-print(bug_info())
+bug_info()
