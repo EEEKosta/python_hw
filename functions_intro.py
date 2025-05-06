@@ -2,12 +2,12 @@
 # 1. Функции
 
 def greet_user():
-    name = input('Введите имя: ')
+    name = str(input('Введите имя: '))
     print(f'Привет, {name}! Добро пожаловать в мир Python!')
 
 def calculate_sum():
-    a = input('Введите первое число: ')
-    b = input('Введите второе число: ')
+    a = int(input('Введите первое число: '))
+    b = int(input('Введите второе число: '))
     sum = a + b
     print(f'Сумма чисел: {sum}')
 
