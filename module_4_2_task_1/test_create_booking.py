@@ -45,7 +45,7 @@ class TestBooking:
         update_booking = auth_session.put(f"{BASE_URL}/booking/{boking_id}", json=booking_data_2)
         assert update_booking.json()["additionalneeds"] is not None, "Список отсутствует"
 
-    # проверка невалидного json в запросе
+    # проверка статус кода при невалидном json в запросе
     def test_update_booking_400(self, auth_session, create_booking):
         booking = create_booking
         booking_id = booking.json().get("bookingid")
