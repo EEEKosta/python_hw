@@ -34,7 +34,7 @@ class TestBooking:
         update_booking = auth_session.put(f"{BASE_URL}/booking/{booking_id}", json=booking_data_2)
         assert booking.json()["booking"]["firstname"] != update_booking.json()["firstname"]
 
-    # проверка того что список additionalneeds добавилс
+    # проверка того что список additionalneeds добавился
     def test_update_booking_additionalneeds(self, auth_session, booking_data, booking_data_2):
         booking = auth_session.post(f"{BASE_URL}/booking", json=booking_data)
         assert booking.status_code == 200, "Ошибка при создании брони"
