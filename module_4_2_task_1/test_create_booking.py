@@ -48,11 +48,11 @@ class TestBooking:
     # проверка частичного изменения, одного поля
     def test_partial_update_booking(self, auth_session, create_booking, booking_data, booking_data_2):
         booking = create_booking
-        booking_id = booking.get("bookingid")
+        booking_id = booking.json().get("bookingid")
         assert booking_id is not None, "id брони не найден в ответе"
 
         update_booking = auth_session.patch(f"{BASE_URL}/booking/{booking_id}", json={"firstname": faker.first_name()})
-        assert booking["booking"].get('firstname') != update_booking.json().get("firstname")
+        assert booking.json()["booking"].get('firstname') != update_booking.json().get("firstname")
 
     # проверка того что созданая бронь есть в общем списке
     def test_get_booking(self, auth_session, booking_data):
