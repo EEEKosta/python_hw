@@ -1,5 +1,5 @@
-from module_4_2_task_1.conftest import faker, create_booking
-from module_4_2_task_1.constant import BASE_URL
+from module_4_2_task_2.conftest import faker, create_booking
+from module_4_2_task_2.constant import BASE_URL
 
 
 class TestBooking:

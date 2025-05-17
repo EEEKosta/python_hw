@@ -2,7 +2,7 @@ import pytest
 import requests
 from requests import Session
 
-from module_4_2_task_1.constant import HEADERS, BASE_URL
+from module_4_2_task_2.constant import HEADERS, BASE_URL
 from faker import Faker
 
 faker = Faker()
