@@ -5,13 +5,13 @@ from module_4_2_task_1.constant import BASE_URL
 class TestBooking:
 
     def test_create_booking(self, auth_session, booking_data):
-        create_booking = auth_session.post(f"{BASE_URL}/booking", json=booking_data)
-        assert create_booking.status_code == 200, "Ошибка при создании брони"
-        booking_id = create_booking.json().get("bookingid")
+        booking = auth_session.post(f"{BASE_URL}/booking", json=booking_data)
+        assert booking.status_code == 200, "Ошибка при создании брони"
+        booking_id = booking.json().get("bookingid")
         assert booking_id is not None, "id брони не найден в ответе"
 
-        assert create_booking.json()["booking"]["firstname"] == booking_data["firstname"], "Имя не совпадает"
-        assert create_booking.json()["booking"]["totalprice"] == booking_data["totalprice"], "Стоимость не совпадает"
+        assert booking.json()["booking"]["firstname"] == booking_data["firstname"], "Имя не совпадает"
+        assert booking.json()["booking"]["totalprice"] == booking_data["totalprice"], "Стоимость не совпадает"
 
         get_booking = auth_session.get(f"{BASE_URL}/booking/{booking_id}")
         assert get_booking.status_code == 200, "Бронь не найдена"
@@ -25,21 +25,21 @@ class TestBooking:
 
     # проверка обновления брони
     def test_update_booking(self, auth_session, booking_data, booking_data_2):
-        create_booking = auth_session.post(f"{BASE_URL}/booking", json=booking_data)
-        assert create_booking.status_code == 200, "Ошибка при создании брони"
+        booking = auth_session.post(f"{BASE_URL}/booking", json=booking_data)
+        assert booking.status_code == 200, "Ошибка при создании брони"
 
-        booking_id = create_booking.json().get("bookingid")
+        booking_id = booking.json().get("bookingid")
         assert booking_id is not None, "id брони не найден в ответе"
 
         update_booking = auth_session.put(f"{BASE_URL}/booking/{booking_id}", json=booking_data_2)
-        assert create_booking.json()["booking"]["firstname"] != update_booking.json()["firstname"]
+        assert booking.json()["booking"]["firstname"] != update_booking.json()["firstname"]
 
     # проверка того что список additionalneeds добавилс
     def test_update_booking_additionalneeds(self, auth_session, booking_data, booking_data_2):
-        create_booking = auth_session.post(f"{BASE_URL}/booking", json=booking_data)
-        assert create_booking.status_code == 200, "Ошибка при создании брони"
+        booking = auth_session.post(f"{BASE_URL}/booking", json=booking_data)
+        assert booking.status_code == 200, "Ошибка при создании брони"
 
-        boking_id = create_booking.json().get("bookingid")
+        boking_id = booking.json().get("bookingid")
         assert boking_id is not None, "id брони не найден в ответе"
 
         update_booking = auth_session.put(f"{BASE_URL}/booking/{boking_id}", json=booking_data_2)
@@ -66,10 +66,10 @@ class TestBooking:
 
     # проверка того что созданая бронь есть в общем списке
     def test_get_booking(self, auth_session, booking_data):
-        create_booking = auth_session.post(f"{BASE_URL}/booking", json=booking_data)
-        assert create_booking.status_code == 200, "Ошибка при создании брони"
+        booking = auth_session.post(f"{BASE_URL}/booking", json=booking_data)
+        assert booking.status_code == 200, "Ошибка при создании брони"
 
-        booking_id = create_booking.json().get("bookingid")
+        booking_id = booking.json().get("bookingid")
         get_booking = auth_session.get(f"{BASE_URL}/booking")
         assert any(item["bookingid"] == booking_id for item in get_booking.json()), "Бронь не найдена"
 
